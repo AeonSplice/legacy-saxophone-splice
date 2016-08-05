@@ -9,3 +9,31 @@ h1, p, ol, li, body {
 .strikethrough {
   text-decoration: line-through;
 }
+
+.blink {
+  animation-duration: 0.7s;
+  animation-iteration-count: infinite;
+  animation-name: blink;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1.0;
+  }
+
+  25% {
+    opacity: 0.75;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  75% {
+    opacity: 0.25;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

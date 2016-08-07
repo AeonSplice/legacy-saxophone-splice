@@ -1,0 +1,8 @@
+"gg_wmd_missile"
+{
+	"material"	"overviews/gg_wmd_missile"	// texture file
+	"pos_x"		"-803"	// X coordinate,
+	"pos_y"		"1873"	// Y coordinate,
+	"scale"		"2.3" 	// and used scale used when taking the screenshot
+	"rotate"	"0"	// map was rotated by 90 degress in image editor
+}

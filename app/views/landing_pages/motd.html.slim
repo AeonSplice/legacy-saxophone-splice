@@ -1,3 +1,20 @@
+.matrixify
+  marquee scrollamount='7'
+    h1.blink ＡＥＳＴＨＥＴＩＣ
+  marquee scrollamount='5' direction='right'
+    h2.strobe ＶＡＰＯＲＷＡＶＥ
+  marquee scrollamount='10'
+    h3.blink ＮＯＰＥ．ＡＶＩ
+  marquee scrollamount='10' direction='right'
+    h4.strobe ＷＥＩＲＤ  ＦＡＣＥＢＯＯＫ
+  marquee scrollamount='15'
+    h5.blink 永劫スプライス
+  marquee scrollamount='15' direction='right'
+    h6.strobe ＡＥＯＮ  ＳＰＬＩＣＥ
+audio(autoplay)
+  source src="#{audio_path('motd.mp3')}" type='audio/mpeg'
+  | Your browser is too lame to support this site.
+hr
 .center
   h1
     == link_to 'Aeon Splice', root_path, class: 'clean'
@@ -16,20 +33,3 @@ ol
   li Stats Persistence
   li More Maps
   li 24/7 Uptime
-hr
-.matrixify
-  marquee scrollamount='7'
-    h1.blink ＡＥＳＴＨＥＴＩＣ
-  marquee scrollamount='5' direction='right'
-    h2.strobe ＶＡＰＯＲＷＡＶＥ
-  marquee scrollamount='10'
-    h3.blink ＮＯＰＥ．ＡＶＩ
-  marquee scrollamount='10' direction='right'
-    h4.strobe ＷＥＩＲＤ  ＦＡＣＥＢＯＯＫ
-  marquee scrollamount='15'
-    h5.blink 永劫スプライス
-  marquee scrollamount='15' direction='right'
-    h6.strobe ＡＥＯＮ  ＳＰＬＩＣＥ
-audio(autoplay)
-  source src="#{audio_path('motd.mp3')}" type='audio/mpeg'
-  | Your browser is too lame to support this site.

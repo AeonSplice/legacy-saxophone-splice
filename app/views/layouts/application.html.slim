@@ -3,5 +3,10 @@ html
   head
     == render partial: 'layouts/meta'
   body
-    == render partial: 'layouts/navigation'
-    == yield
+    #container
+      #header.rainbbow
+        == render partial: 'layouts/navigation'
+      #content
+        == yield
+      #footer
+        == render partial: 'layouts/footer'

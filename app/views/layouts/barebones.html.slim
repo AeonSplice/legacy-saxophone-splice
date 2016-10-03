@@ -3,4 +3,8 @@ html
   head
     == render partial: 'layouts/meta'
   body
-    == yield
+    #container
+      #content
+        == yield
+      #footer
+        == render partial: 'layouts/footer'

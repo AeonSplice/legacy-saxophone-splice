@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: saxophone-splice_production
-  username: saxophone-splice
-  password: <%= ENV['SAXOPHONE-SPLICE_DATABASE_PASSWORD'] %>
+  username: aeon-rails
+  password: <%= ENV['AEON_RAILS_DB_PASSWORD'] %>

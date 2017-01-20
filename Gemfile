@@ -25,12 +25,13 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'slim-rails' # clean emmett-like html templates
 gem 'font-awesome-rails'
+gem 'sorcery'
 
 ################
 ## Deployment ##
 ################
 
-gem 'capistrano'
+gem 'capistrano', '~> 3.6.1'
 gem 'capistrano-bundler'
 gem 'capistrano-rails'
 gem 'capistrano-rvm'

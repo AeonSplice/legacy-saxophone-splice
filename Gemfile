@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.3.3'
 
 ###################
 ## Rails General ##
@@ -23,9 +23,10 @@ gem 'jbuilder', '~> 2.5'
 ## Splice Specific ##
 #####################
 
-gem 'slim-rails' # clean emmett-like html templates
-gem 'font-awesome-rails'
-gem 'sorcery'
+gem 'slim-rails'          # clean emmett-like html templates
+gem 'font-awesome-rails'  # icon sets
+gem 'sorcery'             # Authentication
+gem 'pundit'              # Authorization
 
 ################
 ## Deployment ##
@@ -43,16 +44,32 @@ gem 'capistrano-rvm'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'rspec-rails'
+  gem 'i18n-tasks'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'capybara'
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
+  ######################
+  ## Web Page Helpers ##
+  ######################
+  gem 'binding_of_caller'   # Dependancy for better_errors
+  gem 'better_errors'       # Pretty up error pages'
+  gem 'letter_opener'       # View emails in development w/o sending
+  ###########
+  ## Other ##
+  ###########
+  gem 'ruby-graphviz'
+  gem 'rails-erd'
+  ###################
+  ## Rails Default ##
+  ###################
   gem 'listen', '~> 3.0.5'
-  gem 'letter_opener' # View emails in development w/o sending
-  gem 'binding_of_caller' # Dependancy for better_errors
-  gem 'better_errors' # Pretty up error pages'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'web-console'         # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'spring'              # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring-watcher-listen', '~> 2.0.0'
 end

@@ -2,7 +2,7 @@
 lock '3.6.1'
 
 set :application, 'aeonsplice'
-set :repo_url, 'git@github.com:athix/saxophone-splice.git'
+set :repo_url, 'git@github.com:aeonsplice/saxophone-splice.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -27,7 +27,10 @@ set :deploy_to, '/home/athix/aeonsplice'
 set :linked_files, %w{config/database.yml}
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+# Prevent capistrano from generating bin stubs when running bundle install
+set :bundle_binstubs, nil
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

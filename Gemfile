@@ -32,10 +32,11 @@ gem 'pundit'              # Authorization
 ## Deployment ##
 ################
 
-gem 'capistrano', '~> 3.6.1'
+gem 'capistrano', '~> 3.7.1'
 gem 'capistrano-bundler'
 gem 'capistrano-rails'
 gem 'capistrano-rvm'
+gem 'capistrano-passenger'
 
 ##########################
 ## Environment Specific ##

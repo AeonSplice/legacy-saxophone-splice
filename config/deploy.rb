@@ -1,5 +1,5 @@
-# config valid only for Capistrano 3.6.1
-lock '3.6.1'
+# config valid only for Capistrano 3.7.1
+lock '3.7.1'
 
 set :application, 'aeonsplice'
 set :repo_url, 'git@github.com:aeonsplice/saxophone-splice.git'
@@ -9,10 +9,6 @@ set :repo_url, 'git@github.com:aeonsplice/saxophone-splice.git'
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/athix/aeonsplice'
-# set :deploy_to, '/var/www/my_app'
-
-# Default value for :scm is :git
-# set :scm, :git
 
 # Default value for :format is :pretty
 # set :format, :pretty
@@ -32,6 +28,9 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 # Prevent capistrano from generating bin stubs when running bundle install
 set :bundle_binstubs, nil
 
+# Tell passenger what version of ruby via RVM to use
+set :passenger_rvm_ruby_version, '2.3.3'
+
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
@@ -40,13 +39,14 @@ set :bundle_binstubs, nil
 
 namespace :deploy do
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
+  # Now taken care of by capistrano-passenger
+  # desc 'Restart application'
+  # task :restart do
+  #   on roles(:app), in: :sequence, wait: 5 do
+  #     # Your restart mechanism here, for example:
+  #     execute :touch, release_path.join('tmp/restart.txt')
+  #   end
+  # end
 
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'

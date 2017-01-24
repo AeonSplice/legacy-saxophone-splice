@@ -48,6 +48,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'i18n-tasks'
   gem 'factory_girl_rails'
+  gem 'thin'
 end
 
 group :test do

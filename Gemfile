@@ -66,7 +66,7 @@ group :development do
   ###########
   gem 'ruby-graphviz'
   gem 'rails-erd'
-  gem 'rails_real_favicon' # FavIcon Generator
+  # gem 'rails_real_favicon' # FavIcon Generator (not needed unless regenerating favicons)
   ###################
   ## Rails Default ##
   ###################

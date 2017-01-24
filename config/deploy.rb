@@ -30,6 +30,7 @@ set :bundle_binstubs, nil
 
 # Tell passenger what version of ruby via RVM to use
 set :passenger_rvm_ruby_version, '2.3.3'
+set :rvm_ruby_version, '2.3.3'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

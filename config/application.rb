@@ -15,8 +15,7 @@ module SaxophoneSplice
     config.sass.preferred_syntax = :sass
 
     # Disabled while I migrate directories in prep for multiple servers
-    # config.use_ssl = true
-    # config.force_ssl = true
+    config.force_ssl = true
 
     config.generators do |g|
       g.test_framework = :rspec

@@ -1,8 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    acme-client (0.5.0)
-      faraday (~> 0.9, >= 0.9.1)
     actioncable (5.0.1)
       actionpack (= 5.0.1)
       nio4r (~> 1.2)
@@ -65,9 +63,6 @@ GEM
       capistrano (~> 3.1)
       sshkit (~> 1.2)
     capistrano-harrow (0.5.3)
-    capistrano-lets-encrypt (0.2.0)
-      capistrano (>= 3.0.0)
-      letsencrypt-cli (>= 0.1.4)
     capistrano-passenger (0.2.0)
       capistrano (~> 3.0)
     capistrano-rails (1.2.2)
@@ -92,7 +87,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    colorize (0.8.1)
     concurrent-ruby (1.0.4)
     daemons (1.2.4)
     debug_inspector (0.0.2)
@@ -141,10 +135,6 @@ GEM
     jwt (1.5.6)
     launchy (2.4.3)
       addressable (~> 2.3)
-    letsencrypt-cli (0.4.1)
-      acme-client (>= 0.2.4)
-      colorize
-      thor
     letter_opener (1.4.1)
       launchy (~> 2.2)
     libv8 (3.16.14.17)
@@ -313,7 +303,6 @@ DEPENDENCIES
   byebug
   capistrano (= 3.7.2)
   capistrano-bundler
-  capistrano-lets-encrypt
   capistrano-passenger
   capistrano-rails
   capistrano-rvm

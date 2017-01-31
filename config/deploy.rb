@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.7
-lock '3.7'
+lock '3.7.2'
 
 set :application, 'aeonsplice'
 set :repo_url, 'git@github.com:aeonsplice/saxophone-splice.git'

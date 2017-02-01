@@ -10,22 +10,19 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
  */
+// Import Libraries
 @import font-awesome
 
-// Import Fonts
-@import url('https://fonts.googleapis.com/css?family=Electrolize')
+// Import Utility Files
+@import 'util/variables'
+@import 'util/fonts'
 
-html, body
-  margin: 0
-  padding: 0
-  height: 100%
-
-h1, h2, h3, h4, h5, h6, p
-  font-family: 'Electrolize', sans-serif
-
-h1, p, ol, li, body, a, a:visited
-  color: #fff
-  background-color: #000
+// Import All Global Styles
+@import 'global/animations'
+@import 'global/base'
+@import 'global/inline'
+@import 'global/layouts'
+@import 'global/misc'
+@import 'global/scaffolds'

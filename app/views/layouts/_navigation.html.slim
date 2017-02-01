@@ -1,4 +1,7 @@
 ul.menu
+  li.logo
+    == link_to root_path do
+      == image_tag 'banner/color/planet-horizontal.png', height: 25
   li
     == link_to root_path do
       .fa.fa-home
@@ -7,7 +10,23 @@ ul.menu
     == link_to about_path do
       .fa.fa-question-circle
       span< About
-  li.right
+  li
     == link_to contact_path do
       .fa.fa-envelope
       span< Contact
+  .right
+    - if current_user
+      li = current_user.username
+      li
+        == link_to '#' do
+          .fa.fa-sign-out
+          span< Logout
+    - else
+      li
+        == link_to '#' do
+          .fa.fa-sign-in
+          span< Login
+      li
+        == link_to '#' do
+          .fa.fa-user-plus
+          span< Sign up

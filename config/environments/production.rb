@@ -52,6 +52,9 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
+  # Tell mailer our setup
+  config.action_mailer.default_url_options = { host: 'aeonsplice.com', protocol: 'https' }
+
   # Use Gandi SMTP to send emails
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp

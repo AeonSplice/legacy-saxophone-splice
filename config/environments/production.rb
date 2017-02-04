@@ -61,7 +61,7 @@ Rails.application.configure do
 
   # Set SMTP settings
   ActionMailer::Base.smtp_settings = {
-    domain:               'aeonsplice.com',
+    domain:               'smtp.aeonsplice.com',
     address:              'mail.gandi.net',
     port:                 587,
     authentication:       :login,

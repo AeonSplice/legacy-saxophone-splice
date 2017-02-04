@@ -5,10 +5,11 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.activation_needed_email.subject
   #
-  def activation_needed_email
-    @greeting = "Hi"
+  def activation_needed_email(user)
+    @user = user
+    @url = activate_user_url(user.activation_token)
 
-    mail to: "to@example.org"
+    mail to: user.email
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -16,9 +17,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.activation_success_email.subject
   #
-  def activation_success_email
-    @greeting = "Hi"
+  def activation_success_email(user)
+    @user = user
 
-    mail to: "to@example.org"
+    mail to: user.email
   end
 end

@@ -13,3 +13,25 @@
 
 .center
   text-align: center
+
+.right
+  text-align: right
+
+.float-right
+  float: right
+
+.left
+  text-align: left
+
+.float-left
+  float: left
+
+// Who needs obfuscation when your code is this unreadable as-is?
+$max-steps: 50
+$atomic-list: 'mt' 'margin-top', 'mr' 'margin-right', 'mb' 'margin-bottom', 'ml' 'margin-left', 'm' 'margin', 'pt' 'padding-top', 'pr' 'padding-right', 'pb' 'padding-bottom', 'pl' 'padding-left', 'p' 'padding'
+@each $set in $atomic-list
+  @for $step from 0 through $max-steps
+    $class: #{nth($set, 1)}#{$step}
+    $property: #{nth($set, 2)}
+    .#{$class}
+      #{$property}: #{$step}px !important

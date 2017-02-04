@@ -1,3 +1,4 @@
-' User#activation_success_email
+' Hi, #{@user.username}!
+= "=" * (5 + @user.username.length)
 = "\r\n" * 2
-' #{@greeting + ", find me in app/views/user_mailer/activation_success_email.text.slim"}
+' Your account has been successfully activated!

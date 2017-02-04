@@ -1,2 +1,5 @@
-h1 User#activation_needed_email
-p = @greeting + ", find me in app/views/user_mailer/activation_needed_email.html.slim"
+h1 Hi, #{@user.username}!
+p
+  span> To activate your account, use
+  a href="#{@url}" this
+  span< link!

@@ -32,6 +32,14 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  # Tell mailer our local setup
+  config.action_mailer.default_url_options = { host: 'localhost:3000', protocol: 'https' }
+
+  # Use letter opener to view emails locally
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :letter_opener
+
+  # Don't cache emails in dev
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.

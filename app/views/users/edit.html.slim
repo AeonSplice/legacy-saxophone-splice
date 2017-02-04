@@ -1,8 +1,10 @@
-h1 Editing user
-
-== render 'form'
-
-= link_to 'Show', @user
-'|
-= link_to 'Back', users_path
-
+.display-case
+  .panel.panel--padded
+    .panel__header
+      h1 Edit Preferences
+    .panel__body
+      == render 'form'
+  .center.mt20
+    = link_to 'View Profile', @user
+    span<> |
+    = link_to 'Back', :back

@@ -19,7 +19,14 @@ module SaxophoneSplice
 
     config.generators do |g|
       g.test_framework = :rspec
-      g.fixture_replacement :factory_girl
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+      g.stylesheets = false
+      g.javascripts = false
     end
+
+    # Disable field_with_errors div
+    # config.action_view.field_error_proc = Proc.new  do |html_tag, instance|
+    #   html_tag.html_safe
+    # end
   end
 end

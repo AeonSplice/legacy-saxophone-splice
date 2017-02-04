@@ -190,7 +190,7 @@ Rails.application.config.sorcery.configure do |config|
     # specify username attributes, for example: [:username, :email].
     # Default: `[:email]`
     #
-    # user.username_attribute_names =
+    # user.username_attribute_names = [:username, :email]
 
     # change *virtual* password attribute, the one which is used until an encrypted one is generated.
     # Default: `:password`
@@ -200,7 +200,7 @@ Rails.application.config.sorcery.configure do |config|
     # downcase the username before trying to authenticate, default is false
     # Default: `false`
     #
-    # user.downcase_username_before_authenticating =
+    # user.downcase_username_before_authenticating = true
 
     # change default email attribute.
     # Default: `:email`
@@ -279,12 +279,12 @@ Rails.application.config.sorcery.configure do |config|
     # how many seconds before the activation code expires. nil for never expires.
     # Default: `nil`
     #
-    # user.activation_token_expiration_period =
+    user.activation_token_expiration_period = 3.hours
 
     # your mailer class. Required.
     # Default: `nil`
     #
-    user.user_activation_mailer = 'UserMailer'
+    user.user_activation_mailer = UserMailer
 
     # when true sorcery will not automatically
     # email activation details and allow you to
@@ -333,7 +333,7 @@ Rails.application.config.sorcery.configure do |config|
     # mailer class. Needed.
     # Default: `nil`
     #
-    # user.reset_password_mailer =
+    user.reset_password_mailer = UserMailer
 
     # reset password email method on your mailer class.
     # Default: `:reset_password_email`
@@ -444,5 +444,5 @@ Rails.application.config.sorcery.configure do |config|
 
   # This line must come after the 'user config' block.
   # Define which model authenticates with sorcery.
-  config.user_class = 'User'
+  config.user_class = User
 end

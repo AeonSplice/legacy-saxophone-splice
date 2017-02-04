@@ -1,0 +1,11 @@
+.display-case
+  .panel.panel--padded
+    .panel__header
+      h1 Login
+    .panel__body
+      = render partial: 'form'
+      hr
+      .center
+        = link_to 'Forgot your password?', '#thats_unfortunate'
+  .center.mt20
+    = link_to 'Back', :back, class: 'button'

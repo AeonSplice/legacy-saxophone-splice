@@ -7,17 +7,28 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # GET /users/1
-  # GET /users/1.json
+  # GET /users/:token/activate
+  def activate
+    if @user = User.load_from_activation_token(params[:token])
+      @user.activate!
+      redirect_to login_path, notice: 'Successfully activated!'
+    else
+      redirect_to root_path, error: 'Invalid activation token.'
+    end
+  end
+
+  # GET /users/:id
+  # GET /users/:id.json
   def show
   end
 
   # GET /users/new
   def new
+    redirect_back fallback_location: root_path, error: 'Already logged in.' and return if current_user
     @user = User.new
   end
 
-  # GET /users/1/edit
+  # GET /users/:id/edit
   def edit
   end
 
@@ -25,16 +36,13 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     # Limit user creation for testing (don't let bots fuck with me TOO hard).
-    if User.count >= 5
-      redirect_to users_path, error: 'Too many users. Stahp.'
-      return
-    end
+    redirect_to users_path, error: 'Too many users. Stahp.' and return if User.count >= 20
 
     @user = User.new(user_params)
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+      if verify_recaptcha(model: @user) && @user.save
+        format.html { redirect_to root_path, notice: 'Account created, check your email for your activation link.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -43,8 +51,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
+  # PATCH/PUT /users/:id
+  # PATCH/PUT /users/:id.json
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -57,8 +65,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
+  # DELETE /users/:id
+  # DELETE /users/:id.json
   def destroy
     @user.destroy
     respond_to do |format|
@@ -75,6 +83,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end
 end

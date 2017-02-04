@@ -27,6 +27,7 @@ gem 'slim-rails'          # clean emmett-like html templates
 gem 'font-awesome-rails'  # icon sets
 gem 'sorcery'             # Authentication
 gem 'pundit'              # Authorization
+gem 'recaptcha', require: 'recaptcha/rails' # Recaptcha for forms
 
 ################
 ## Deployment ##
@@ -60,7 +61,7 @@ group :development do
   ## Web Page Helpers ##
   ######################
   gem 'binding_of_caller'   # Dependancy for better_errors
-  gem 'better_errors'       # Pretty up error pages'
+  gem 'better_errors'       # Pretty up error pages
   gem 'letter_opener'       # View emails in development w/o sending
   ###########
   ## Other ##

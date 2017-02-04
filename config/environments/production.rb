@@ -52,6 +52,21 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
+  # Use Gandi SMTP to send emails
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+
+  # Set SMTP settings
+  ActionMailer::Base.smtp_settings = {
+    domain:               'aeonsplice.com',
+    address:              'mail.gandi.net',
+    port:                 587,
+    authentication:       :login,
+    user_name:            ENV['AEON_SMTP_USER'],
+    password:             ENV['AEON_SMTP_PASS'],
+    enable_starttls_auto: true
+  }
+
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "saxophone-splice_#{Rails.env}"

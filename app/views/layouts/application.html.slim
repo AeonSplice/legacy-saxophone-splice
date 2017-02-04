@@ -3,8 +3,10 @@ html
   head
     == render partial: 'layouts/meta'
   body
+    #notifications
+      == render partial: 'layouts/notifications'
     #container
-      #header.rainbbow
+      #header
         == render partial: 'layouts/navigation'
       #content
         == yield

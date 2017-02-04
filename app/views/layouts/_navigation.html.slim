@@ -16,17 +16,19 @@ ul.menu
       span< Contact
   .right
     - if current_user
-      li = current_user.username
       li
-        == link_to '#' do
+        == link_to current_user do
+          span = current_user.username
+      li
+        == link_to logout_path, method: 'post' do
           .fa.fa-sign-out
           span< Logout
     - else
       li
-        == link_to '#' do
+        == link_to login_path do
           .fa.fa-sign-in
           span< Login
       li
-        == link_to '#' do
+        == link_to signup_path do
           .fa.fa-user-plus
           span< Sign up

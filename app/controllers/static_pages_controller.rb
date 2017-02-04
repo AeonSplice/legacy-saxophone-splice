@@ -1,4 +1,4 @@
-class LandingPagesController < ApplicationController
+class StaticPagesController < ApplicationController
   layout 'barebones', only: [:motd]
 
   def index

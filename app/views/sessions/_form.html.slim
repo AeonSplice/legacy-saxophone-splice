@@ -1,14 +1,12 @@
 = form_tag sessions_path, method: 'post' do
   .field
-    = email_field_tag :email, @user.email, placeholder: 'Username / Email', required: true
-    = label_tag :email do
+    = text_field_tag :login, @login, placeholder: 'Username / Email', required: true
+    = label_tag :login do
       .fa.fa-user
-    = show_errors(@user, :email)
   .field
     = password_field_tag :password, nil, placeholder: 'Password', required: true
     = label_tag :password do
       .fa.fa-lock
-    = show_errors(@user, :password)
   .actions
     = submit_tag 'Login', class: 'button button--primary w60'
     .float-right.right.w40

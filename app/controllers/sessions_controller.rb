@@ -6,8 +6,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if @user = login(params[:email], params[:password])
-      flash[:notice] = 'Login successful'
+    if @user = login(params[:login], params[:password])
+      flash[:success] = 'Login successful!'
       if session[:return_to]
         redirect_to session[:return_to]
         session[:return_to] = nil
@@ -15,8 +15,8 @@ class SessionsController < ApplicationController
         redirect_to root_path
       end
     else
-      flash.now[:alert] = 'Login failed'
-      @user = User.new email: params[:email]
+      flash.now[:error] = 'Incorrect Username / Password combination.'
+      @login = params[:login]
       render :new
     end
   end

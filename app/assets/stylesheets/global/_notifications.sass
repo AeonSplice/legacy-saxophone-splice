@@ -1,0 +1,36 @@
+.notification
+  position: relative
+  padding: 4px 19px 4px 6px
+  color: $primary-color
+  background-color: $white
+  border: 1px solid $primary-color
+  border-radius: 2px
+  font-size: 12px
+  text-align: left
+  .notification__dismiss-button
+    color: $primary-color
+    position: absolute
+    right: 4px
+    top: 0
+    padding: 0
+    background-color: transparent
+    border: 0
+    font-size: 20px
+    cursor: pointer
+    vertical-align: middle
+    line-height: 100%
+  &.notification--error
+    color: $error-color
+    border-color: $error-color
+    .notification__dismiss-button
+      color: $error-color
+  &.notification--alert
+    color: $alert-color
+    border-color: $alert-color
+    .notification__dismiss-button
+      color: $alert-color
+  &.notification--success
+    color: $success-color
+    border-color: $success-color
+    .notification__dismiss-button
+      color: $success-color

@@ -26,6 +26,15 @@
 .float-left
   float: left
 
+.display-case
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+
+.full-width
+  width: 100%
+
 // Who needs obfuscation when your code is this unreadable as-is?
 $max-steps: 50
 $atomic-list: 'mt' 'margin-top', 'mr' 'margin-right', 'mb' 'margin-bottom', 'ml' 'margin-left', 'm' 'margin', 'pt' 'padding-top', 'pr' 'padding-right', 'pb' 'padding-bottom', 'pl' 'padding-left', 'p' 'padding'
@@ -35,3 +44,11 @@ $atomic-list: 'mt' 'margin-top', 'mr' 'margin-right', 'mb' 'margin-bottom', 'ml'
     $property: #{nth($set, 2)}
     .#{$class}
       #{$property}: #{$step}px !important
+
+$percent-list: 'w' 'width', 'h' 'height'
+@each $set in $percent-list
+  @for $step from 0 through 100
+    $class: #{nth($set, 1)}#{$step}
+    $property: #{nth($set, 2)}
+    .#{$class}
+      #{$property}: #{$step}% !important

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = policy_scope(User.all)
   end
 
   # GET /users/:token/activate
@@ -20,16 +20,19 @@ class UsersController < ApplicationController
   # GET /users/:id
   # GET /users/:id.json
   def show
+    authorize @user, :show?
   end
 
   # GET /users/new
   def new
+    # TODO: Change to authorize begin/rescue
     redirect_back fallback_location: root_path, error: 'Already logged in.' and return if current_user
     @user = User.new
   end
 
   # GET /users/:id/edit
   def edit
+    authorize @user, :edit?
   end
 
   # POST /users
@@ -41,7 +44,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
-      if verify_recaptcha(model: @user) && @user.save
+      if recaptcha_passed(@user) && @user.save
         format.html { redirect_to root_path, notice: 'Account created, check your email for your activation link.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -54,6 +57,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/:id
   # PATCH/PUT /users/:id.json
   def update
+    authorize @user, :update?
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -68,6 +72,7 @@ class UsersController < ApplicationController
   # DELETE /users/:id
   # DELETE /users/:id.json
   def destroy
+    authorize @user, :destroy?
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
@@ -79,6 +84,12 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    # Override record not found defaults
+    def record_not_found
+      skip_auth
+      redirect_to users_path, error: 'Could not find that user.'
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

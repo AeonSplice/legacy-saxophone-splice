@@ -1,2 +1,4 @@
 - flash.each do |key, value|
- = content_tag :div, value, class: "flash #{key}"
+  div class="notification notification--#{key}"
+    button type='button' class='notification__dismiss-button' &times;
+    span = value

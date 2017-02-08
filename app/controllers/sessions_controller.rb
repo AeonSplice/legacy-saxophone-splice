@@ -24,9 +24,9 @@ class SessionsController < ApplicationController
   def destroy
     if current_user
       logout
-      redirect_to root_path, notice: 'Logged out!'
+      redirect_to root_path, success: 'Logged out!'
     else
-      redirect_to root_path, notice: 'Shenanigans!'
+      redirect_to root_path, error: 'Shenanigans!'
     end
   end
 end

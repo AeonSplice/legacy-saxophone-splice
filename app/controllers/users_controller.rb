@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def activate
     if @user = User.load_from_activation_token(params[:token])
       @user.activate!
-      redirect_to login_path, notice: 'Successfully activated!'
+      redirect_to login_path, success: 'Successfully activated!'
     else
       redirect_to root_path, error: 'Invalid activation token.'
     end
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if recaptcha_passed(@user) && @user.save
-        format.html { redirect_to root_path, notice: 'Account created, check your email for your activation link.' }
+        format.html { redirect_to root_path, success: 'Account created, check your email for your activation link.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     authorize @user, :update?
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, success: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
     authorize @user, :destroy?
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, success: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -33,11 +33,13 @@ gem 'recaptcha', require: 'recaptcha/rails' # Recaptcha for forms
 ## Deployment ##
 ################
 
-gem 'capistrano', '3.7.2'
-gem 'capistrano-bundler'
-gem 'capistrano-rails'
-gem 'capistrano-rvm'
-gem 'capistrano-passenger'
+group :development do
+  gem 'capistrano', '3.7.2'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano-passenger'
+end
 
 ##########################
 ## Environment Specific ##

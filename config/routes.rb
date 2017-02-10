@@ -8,13 +8,15 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
-  ###################
-  ## Landing Pages ##
-  ###################
+  ##################
+  ## Static Pages ##
+  ##################
 
   get 'about'   => 'static_pages#about',   as: 'about'
   get 'motd'    => 'static_pages#motd',    as: 'motd'
   get 'contact' => 'static_pages#contact', as: 'contact'
+  get 'terms'   => 'static_pages#terms',   as: 'terms'
+  get 'privacy' => 'static_pages#privacy', as: 'privacy'
 
   #####################
   ## User / Sessions ##

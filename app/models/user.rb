@@ -30,4 +30,9 @@ class User < ApplicationRecord
   def send_activation_needed_email!
     super unless bypass_activation_email
   end
+
+  # Prevent setting up activation if created as active
+  def setup_activation
+    super unless activation_state == 'active'
+  end
 end

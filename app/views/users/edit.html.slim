@@ -4,6 +4,35 @@
       h1 Edit Preferences
     .panel__body
       == render 'form'
+      hr
+      - if @user.authentications.any?
+        h3.m0 OAuths:
+        - @user.authentications.each do |auth|
+          p
+            strong> Provider:
+            span = auth.provider.titleize
+            br
+            strong> UID:
+            span = auth.uid
+            br
+            = link_to 'Revoke', auth, data: { confirm: 'Are you sure?' }, method: :delete
+        - unless @user.authentications.count >= 4
+          hr
+      - unless @user.authentications.count >= 4
+        h3.center.m0 Add New OAuth
+        - unless @user.authentications.where(provider: 'facebook').any?
+          == link_to auth_at_provider_path(provider: :facebook), class: 'oauth oauth--facebook' do
+            .fa.fa-facebook
+        - unless @user.authentications.where(provider: 'google').any?
+          == link_to auth_at_provider_path(provider: :google), class: 'oauth oauth--google' do
+            .fa.fa-google
+        - unless @user.authentications.where(provider: 'microsoft').any?
+          == link_to auth_at_provider_path(provider: :microsoft), class: 'oauth oauth--microsoft' do
+            .fa.fa-windows
+        - unless @user.authentications.where(provider: 'twitter').any?
+          == link_to auth_at_provider_path(provider: :twitter), class: 'oauth oauth--twitter' do
+            .fa.fa-twitter
+
   .center.mt20
     = link_to 'View Profile', @user
     span<> |

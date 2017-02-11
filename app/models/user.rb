@@ -1,7 +1,25 @@
 class User < ApplicationRecord
-  authenticates_with_sorcery!
+  authenticates_with_sorcery! do |config|
+    config.authentications_class = Authentication
+  end
 
   attr_accessor :bypass_activation_email
+
+  ##################
+  ## Associations ##
+  ##################
+
+  has_many :authentications, dependent: :destroy
+
+  #######################
+  ## Nested Attributes ##
+  #######################
+
+  accepts_nested_attributes_for :authentications
+
+  ##################################
+  ## Virtual Attribute Validation ##
+  ##################################
 
   validates :password,
     confirmation: true,
@@ -12,14 +30,20 @@ class User < ApplicationRecord
     presence: true,
     if: -> { new_record? || changes[:crypted_password] }
 
+  ###################################
+  ## Database Attribute Validation ##
+  ###################################
+
   validates :username, :email,
-    presence: true
+    presence: true,
+    uniqueness: { case_sensitive: false }
 
   validates :username,
     username_convention: true
 
-  validates :username, :email,
-    uniqueness: { case_sensitive: false }
+  ####################
+  ## Public Methods ##
+  ####################
 
   # Return if current user is activated or not
   def activated?

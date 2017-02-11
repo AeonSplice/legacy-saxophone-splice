@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.x.url = 'localhost:3000'
+
+  # Use ssl and redirect to port 3000 automatically
   config.use_ssl = true
   config.ssl_port = 3000
 

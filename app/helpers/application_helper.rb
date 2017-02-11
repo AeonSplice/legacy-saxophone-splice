@@ -9,4 +9,12 @@ module ApplicationHelper
       end
     end
   end
+
+  def provider_icon(provider)
+    if provider.downcase == 'microsoft'
+      content_tag :div, nil, class: 'fa fa-windows'
+    else
+      content_tag :div, nil, class: "fa fa-#{provider.downcase}"
+    end
+  end
 end

@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'authentications/destroy'
+
+  get 'oauth/oauth'
+
+  get 'oauth/callback'
+
   root to: 'static_pages#index'
 
   ###############
@@ -6,7 +12,8 @@ Rails.application.routes.draw do
   ###############
 
   resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions,        only: [:new, :create, :destroy]
+  resources :authentications, only: [:destroy]
 
   ##################
   ## Static Pages ##
@@ -22,9 +29,13 @@ Rails.application.routes.draw do
   ## User / Sessions ##
   #####################
 
-  get  'login'    => 'sessions#new',      as: 'login'
-  post 'logout'   => 'sessions#destroy',  as: 'logout'
-  get  'signup'   => 'users#new',         as: 'signup'
+  get  'login'  => 'sessions#new',     as: 'login'
+  post 'logout' => 'sessions#destroy', as: 'logout'
+  get  'signup' => 'users#new',        as: 'signup'
 
-  get 'users/:token/activate' => 'users#activate', as: 'activate_user'
+  post 'oauth/callback/:provider' => 'oauth#callback'
+  get  'oauth/callback/:provider' => 'oauth#callback'
+
+  get  'oauth/:provider'       => 'oauth#oauth',    as: 'auth_at_provider'
+  get  'users/:token/activate' => 'users#activate', as: 'activate_user'
 end

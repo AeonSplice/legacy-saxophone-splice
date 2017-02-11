@@ -66,7 +66,7 @@ Rails.application.config.sorcery.configure do |config|
   # What providers are supported by this app, i.e. [:twitter, :facebook, :github, :linkedin, :xing, :google, :liveid, :salesforce, :slack] .
   # Default: `[]`
   #
-  # config.external_providers =
+  config.external_providers = [:facebook, :twitter, :google, :microsoft]
 
   # You can change it by your local ca_file. i.e. '/etc/pki/tls/certs/ca-bundle.crt'
   # Path to ca_file. By default use a internal ca-bundle.crt.
@@ -98,18 +98,18 @@ Rails.application.config.sorcery.configure do |config|
   # Twitter will not accept any requests nor redirect uri containing localhost,
   # make sure you use 0.0.0.0:3000 to access your app in development
   #
-  # config.twitter.key = ""
-  # config.twitter.secret = ""
-  # config.twitter.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=twitter"
-  # config.twitter.user_info_mapping = {:email => "screen_name"}
+  config.twitter.key = ENV['AEON_TWITTER_KEY']
+  config.twitter.secret = ENV['AEON_TWITTER_SECRET']
+  config.twitter.callback_url = "https://#{Rails.configuration.x.url}/oauth/callback/twitter"
+  config.twitter.user_info_mapping = {:email => 'screen_name'}
   #
-  # config.facebook.key = ""
-  # config.facebook.secret = ""
-  # config.facebook.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=facebook"
-  # config.facebook.user_info_mapping = {:email => "name"}
-  # config.facebook.access_permissions = ["email", "publish_actions"]
-  # config.facebook.display = "page"
-  # config.facebook.api_version = "v2.2"
+  config.facebook.key = ENV['AEON_FACEBOOK_KEY']
+  config.facebook.secret = ENV['AEON_FACEBOOK_SECRET']
+  config.facebook.callback_url = "https://#{Rails.configuration.x.url}/oauth/callback/facebook"
+  config.facebook.user_info_mapping = {:email => 'name'}
+  config.facebook.access_permissions = ['email']
+  config.facebook.display = 'page'
+  config.facebook.api_version = 'v2.2'
   #
   # config.github.key = ""
   # config.github.secret = ""
@@ -125,21 +125,21 @@ Rails.application.config.sorcery.configure do |config|
   # config.wechat.secret = ""
   # config.wechat.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=wechat"
   #
-  # config.google.key = ""
-  # config.google.secret = ""
-  # config.google.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=google"
-  # config.google.user_info_mapping = {:email => "email", :username => "name"}
-  # config.google.scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+  config.google.key = ENV['AEON_GOOGLE_KEY']
+  config.google.secret = ENV['AEON_GOOGLE_SECRET']
+  config.google.callback_url = "https://#{Rails.configuration.x.url}/oauth/callback/google"
+  config.google.user_info_mapping = {:email => 'email', :username => 'name'}
+  config.google.scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
   #
   # For Microsoft Graph, the key will be your App ID, and the secret will be your app password/public key.
   # The callback URL "can't contain a query string or invalid special characters", see: https://docs.microsoft.com/en-us/azure/active-directory/active-directory-v2-limitations#restrictions-on-redirect-uris
   # More information at https://graph.microsoft.io/en-us/docs
   #
-  # config.microsoft.key = ""
-  # config.microsoft.secret = ""
-  # config.microsoft.callback_url = "http://0.0.0.0:3000/oauth/callback/microsoft"
-  # config.microsoft.user_info_mapping = {:email => "userPrincipalName", :username => "displayName"}
-  # config.microsoft.scope = "openid email https://graph.microsoft.com/User.Read"
+  config.microsoft.key = ENV['AEON_MICROSOFT_KEY']
+  config.microsoft.secret = ENV['AEON_MICROSOFT_SECRET']
+  config.microsoft.callback_url = "https://#{Rails.configuration.x.url}/oauth/callback/microsoft"
+  config.microsoft.user_info_mapping = {:email => 'userPrincipalName', :username => 'displayName'}
+  config.microsoft.scope = 'openid email https://graph.microsoft.com/User.Read'
   #
   # config.vk.key = ""
   # config.vk.secret = ""
@@ -424,7 +424,7 @@ Rails.application.config.sorcery.configure do |config|
     # Class which holds the various external provider data for this user.
     # Default: `nil`
     #
-    # user.authentications_class =
+    user.authentications_class = Authentication
 
     # User's identifier in authentications class.
     # Default: `:user_id`

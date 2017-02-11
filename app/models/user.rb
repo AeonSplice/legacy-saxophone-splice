@@ -41,6 +41,9 @@ class User < ApplicationRecord
   validates :username,
     username_convention: true
 
+  validates :email,
+    email_convention: true
+
   ####################
   ## Public Methods ##
   ####################

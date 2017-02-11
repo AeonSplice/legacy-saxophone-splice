@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
-  add_flash_types :error
+  add_flash_types :error, :success
 
   rescue_from Pundit::NotAuthorizedError,                 with: :user_not_authorized
   rescue_from ActionController::InvalidAuthenticityToken, with: :session_expired

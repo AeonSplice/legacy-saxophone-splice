@@ -30,7 +30,8 @@ class OauthController < ApplicationController
           session[:provider] = provider
           session[:uid] = @user_hash[:uid]
           render :provider_signup
-        rescue => error
+        rescue => e
+          logger.error e.message
           redirect_to root_path, error: "Failed to login via #{provider.titleize}"
         end # End Try/Catch Block
       end # End Login/Register Block

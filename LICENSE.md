@@ -4,6 +4,11 @@ materials* included in this repository. This explicitly includes the name **Aeon
 and any **logos or graphics** related to it. In non-legalese, feel free to use my code
 however you like, just don't steal my logo or name please!
 
+All Venera fonts are included as part of the "EMBEDDING" section of the Venera Commercial
+License. Do not download or redistribute these fonts, as they are included purely for
+embedding the Venera font on the Aeon Splice website. Please see the Venera license under
+`licenses/Venera_1-5_Commercial_License.pdf`.
+
 MIT License
 
 Copyright (c) 2016-2017 Josh Buker

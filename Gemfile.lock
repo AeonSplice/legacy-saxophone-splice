@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/athix/sorcery.git
-  revision: fd48d561264e6560cd5ae3bdb135e4f70678c65e
+  revision: ca6d7dd16601adf30e77910bfd25247f05520566
   branch: feature/build-users
   specs:
     sorcery (0.10.2)

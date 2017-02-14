@@ -1,0 +1,8 @@
+.display-case
+  .panel.panel--padded
+    .panel__header
+      h1 Sign Up via #{session[:provider].titleize}
+    .panel__body
+      = render 'form'
+  .center.mt20
+    = link_to 'Back', :back, class: 'button'

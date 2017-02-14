@@ -3,7 +3,8 @@ class User < ApplicationRecord
     config.authentications_class = Authentication
   end
 
-  attr_accessor :bypass_activation_email
+  attr_accessor :bypass_activation_email,
+                :bypass_password
 
   ##################
   ## Associations ##
@@ -24,11 +25,11 @@ class User < ApplicationRecord
   validates :password,
     confirmation: true,
     length: { minimum: 8 },
-    if: -> { new_record? || changes[:crypted_password] }
+    if: -> { (new_record? && !bypass_password) || changes[:crypted_password] }
 
   validates :password_confirmation,
     presence: true,
-    if: -> { new_record? || changes[:crypted_password] }
+    if: -> { (new_record? && !bypass_password) || changes[:crypted_password] }
 
   ###################################
   ## Database Attribute Validation ##
@@ -48,14 +49,23 @@ class User < ApplicationRecord
   ## Public Methods ##
   ####################
 
+  # Return if user can remove a given auth
+  def can_remove_auth?(authentication)
+    return false unless authentication.user == self
+    return true if self.crypted_password.present?
+    return true if self.authentications.count >= 2
+    false
+  end
+
   # Return if current user is activated or not
   def activated?
     activation_state == 'active'
   end
 
   # Allow bypassing the activation email
-  def send_activation_needed_email!
-    super unless bypass_activation_email
+  def send_activation_needed_email?
+    return false if bypass_activation_email
+    true
   end
 
   # Prevent setting up activation if created as active

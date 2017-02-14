@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  get 'authentications/destroy'
-
-  get 'oauth/oauth'
-
-  get 'oauth/callback'
-
   root to: 'static_pages#index'
 
   ###############
@@ -33,9 +27,10 @@ Rails.application.routes.draw do
   post 'logout' => 'sessions#destroy', as: 'logout'
   get  'signup' => 'users#new',        as: 'signup'
 
-  post 'oauth/callback/:provider' => 'oauth#callback'
-  get  'oauth/callback/:provider' => 'oauth#callback'
+  post 'oauth/callback/:provider' => 'oauth#callback', provider: /facebook|google|microsoft|twitter/
+  get  'oauth/callback/:provider' => 'oauth#callback', provider: /facebook|google|microsoft|twitter/
 
-  get  'oauth/:provider'       => 'oauth#oauth',    as: 'auth_at_provider'
-  get  'users/:token/activate' => 'users#activate', as: 'activate_user'
+  post 'oauth/signup'          => 'oauth#provider_signup', as: 'provider_signup'
+  get  'oauth/:provider'       => 'oauth#oauth',           as: 'auth_at_provider', provider: /facebook|google|microsoft|twitter/
+  get  'users/:token/activate' => 'users#activate',        as: 'activate_user'
 end

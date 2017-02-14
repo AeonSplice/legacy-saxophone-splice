@@ -1,5 +1,13 @@
 class AuthenticationsController < ApplicationController
-  before_action :set_authentication, only: [:destroy]
+  before_action :set_authentication, only: [:show, :destroy]
+
+  def index
+    @authentications = policy_scope(Authentication.all)
+  end
+
+  def show
+    authorize @authentication, :show?
+  end
 
   # DELETE /authentications/:id
   # DELETE /authentications/:id.json
@@ -7,7 +15,7 @@ class AuthenticationsController < ApplicationController
     authorize @authentication, :destroy?
     user = @authentication.user
     provider = @authentication.provider
-    @authentication.destroy
+    @authentication.destroy!
     respond_to do |format|
       format.html { redirect_to edit_user_path(user), success: "Successfully removed #{provider.titleize} from your account."}
       format.json { head :no_content }

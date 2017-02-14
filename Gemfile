@@ -23,9 +23,12 @@ gem 'jbuilder', '~> 2.5'
 ## Splice Specific ##
 #####################
 
+# For testing new Sorcery features
+gem 'sorcery', github: 'athix/sorcery', branch: 'feature/build-users'
+
 gem 'slim-rails'          # clean emmett-like html templates
 gem 'font-awesome-rails'  # icon sets
-gem 'sorcery'             # Authentication
+# gem 'sorcery'             # Authentication
 gem 'pundit'              # Authorization
 gem 'recaptcha', require: 'recaptcha/rails' # Recaptcha for forms
 

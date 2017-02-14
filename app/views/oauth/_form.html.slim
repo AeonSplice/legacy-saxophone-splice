@@ -1,0 +1,29 @@
+= form_for @user, url: provider_signup_path, method: 'post' do |f|
+  .field
+    = f.text_field :username, placeholder: 'Username', value: @user.username, required: true
+    = f.label :username do
+      .fa.fa-user
+    = show_errors(@user, :username)
+  .field
+    = f.email_field :email, placeholder: 'Email', value: @user.email, required: true
+    = f.label :email do
+      .fa.fa-envelope
+    = show_errors(@user, :email)
+  h4.m5 Password Optional
+  .field
+    = f.password_field :password, placeholder: 'Password'
+    = f.label :password do
+      .fa.fa-lock
+    = show_errors(@user, :password)
+  .field
+    = f.password_field :password_confirmation, placeholder: 'Password Confirmation'
+    = f.label :password_confirmation do
+      .fa.fa-lock
+    = show_errors(@user, :password_confirmation)
+  .field
+    = recaptcha_tags
+    = show_errors(@user, :recaptcha, prefix: false)
+  .actions
+    = f.submit 'Register', class: 'button button--primary w35', data: { disable_with: 'Registering...' }
+    .float-right.right.w25
+      = link_to 'Login', login_path, class: 'button w95'

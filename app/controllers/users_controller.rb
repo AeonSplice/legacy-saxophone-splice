@@ -73,7 +73,7 @@ class UsersController < ApplicationController
   # DELETE /users/:id.json
   def destroy
     authorize @user, :destroy?
-    @user.destroy
+    @user.destroy!
     respond_to do |format|
       format.html { redirect_to users_url, success: 'User was successfully destroyed.' }
       format.json { head :no_content }

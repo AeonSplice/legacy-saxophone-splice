@@ -105,7 +105,7 @@ Rails.application.config.sorcery.configure do |config|
                                         locale: 'locale',
                                         timezone: 'timezone' }
   config.facebook.access_permissions = ['public_profile', 'email']
-  config.facebook.display = 'popup'
+  config.facebook.display = 'page'
   config.facebook.api_version = 'v2.8'
   #
   ############

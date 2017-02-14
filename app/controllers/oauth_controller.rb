@@ -51,7 +51,6 @@ class OauthController < ApplicationController
       end
 
       if recaptcha_passed(@user) && @user.save && @auth.save
-        byebug
         reset_session
         redirect_to root_path, success: 'Account created, check your email for your activation link.'
       else
@@ -64,7 +63,17 @@ class OauthController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username,
+                                 :realname,
+                                 :nickname,
+                                 :email,
+                                 :bio,
+                                 :location,
+                                 :website,
+                                 :locale,
+                                 :timezone,
+                                 :password,
+                                 :password_confirmation)
   end
 
   def auth_params

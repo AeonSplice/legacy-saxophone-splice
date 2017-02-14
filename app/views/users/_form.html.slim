@@ -1,4 +1,6 @@
 = form_for @user do |f|
+  - unless @user.new_record?
+    h4.center.m5 Account Settings
   .field
     = f.text_field :username, placeholder: 'Username', value: @user.username, required: true
     = f.label :username do
@@ -9,6 +11,18 @@
     = f.label :email do
       .fa.fa-envelope
     = show_errors(@user, :email)
+  - unless @user.new_record?
+    .field
+      = f.text_field :locale, placeholder: 'Language', value: @user.locale
+      = f.label :locale do
+        .fa.fa-globe
+      = show_errors(@user, :locale)
+    .field
+      = f.text_field :timezone, placeholder: 'Timezone', value: @user.timezone
+      = f.label :timezone do
+        .fa.fa-clock-o
+      = show_errors(@user, :timezone)
+    h4.center.m5 Change Password
   .field
     = f.password_field :password, placeholder: 'Password', required: @user.new_record?
     = f.label :password do
@@ -19,6 +33,33 @@
     = f.label :password_confirmation do
       .fa.fa-lock
     = show_errors(@user, :password_confirmation)
+  - unless @user.new_record?
+    h4.center.m5 Optional Fields
+    .field
+      = f.text_field :realname, placeholder: 'Real Name', value: @user.realname
+      = f.label :realname do
+        .fa.fa-user
+      = show_errors(@user, :realname)
+    .field
+      = f.text_field :nickname, placeholder: 'Nickname', value: @user.nickname
+      = f.label :nickname do
+        .fa.fa-user
+      = show_errors(@user, :nickname)
+    .field
+      = f.text_area :bio, placeholder: '"Short" bio', value: @user.bio
+      = f.label :bio do
+        .fa.fa-comment
+      = show_errors(@user, :bio)
+    .field
+      = f.text_field :location, placeholder: 'Location', value: @user.location
+      = f.label :location do
+        .fa.fa-map
+      = show_errors(@user, :location)
+    .field
+      = f.text_field :website, placeholder: 'Website', value: @user.website
+      = f.label :website do
+        .fa.fa-link
+      = show_errors(@user, :website)
   - if @user.new_record?
     .field
       = recaptcha_tags
@@ -29,4 +70,4 @@
       .float-right.right.w25
         = link_to 'Login', login_path, class: 'button w95'
     - else
-      = f.submit 'Save Changes', data: { disable_with: 'Saving...' }
+      = f.submit 'Save Changes', class: 'button button--primary', data: { disable_with: 'Saving...' }

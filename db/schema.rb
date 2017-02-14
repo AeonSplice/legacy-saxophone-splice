@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201211616) do
+ActiveRecord::Schema.define(version: 20170214033040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(version: 20170201211616) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                                       null: false
+    t.string   "email",                                           null: false
     t.string   "crypted_password"
     t.string   "salt"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.datetime "last_login_at"
     t.datetime "last_logout_at"
     t.datetime "last_activity_at"
@@ -45,7 +45,14 @@ ActiveRecord::Schema.define(version: 20170201211616) do
     t.string   "activation_state"
     t.string   "activation_token"
     t.datetime "activation_token_expires_at"
-    t.string   "username",                                    null: false
+    t.string   "username",                                        null: false
+    t.string   "locale",                          default: "en",  null: false
+    t.string   "timezone",                        default: "UTC", null: false
+    t.string   "realname"
+    t.string   "nickname"
+    t.string   "website"
+    t.string   "location"
+    t.text     "bio"
     t.index ["activation_token"], name: "index_users_on_activation_token", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["last_logout_at", "last_activity_at"], name: "index_users_on_last_logout_at_and_last_activity_at", using: :btree

@@ -39,6 +39,9 @@ class User < ApplicationRecord
     presence: true,
     uniqueness: { case_sensitive: false }
 
+  validates :locale, :timezone,
+    presence: true
+
   validates :username,
     username_convention: true
 
@@ -60,6 +63,18 @@ class User < ApplicationRecord
   # Return if current user is activated or not
   def activated?
     activation_state == 'active'
+  end
+
+  def meta_present?
+    # NOTE: Holy shit I'm mildly OCD
+    return true if self.realname.present? or
+                   self.nickname.present? or
+                   self.bio.present?      or
+                   self.location.present? or
+                   self.website.present?  or
+                  (self.locale.present?   && self.locale   != 'en' ) or
+                  (self.timezone.present? && self.timezone != 'UTC')
+    false
   end
 
   # Allow bypassing the activation email

@@ -9,7 +9,7 @@
     = f.label :email do
       .fa.fa-envelope
     = show_errors(@user, :email)
-  h4.m5 Password Optional
+  h4.center.m5 Optional Fields
   .field
     = f.password_field :password, placeholder: 'Password'
     = f.label :password do
@@ -20,6 +20,50 @@
     = f.label :password_confirmation do
       .fa.fa-lock
     = show_errors(@user, :password_confirmation)
+  - if @user.realname.present?
+    p.m5 Real Name
+    .field
+      = f.text_field :realname, placeholder: 'Real Name', value: @user.realname
+      = f.label :realname do
+        .fa.fa-user
+      = show_errors(@user, :realname)
+  - if @user.nickname.present?
+    p.m5 Nickname
+    .field
+      = f.text_field :nickname, placeholder: 'Nickname', value: @user.nickname
+      = f.label :nickname do
+        .fa.fa-user
+      = show_errors(@user, :nickname)
+  - if @user.bio.present?
+    .field
+      = f.text_area :bio, placeholder: '"Short" bio', value: @user.bio
+      = f.label :bio do
+        .fa.fa-comment
+      = show_errors(@user, :bio)
+  - if @user.location.present?
+    .field
+      = f.text_field :location, placeholder: 'Location', value: @user.location
+      = f.label :location do
+        .fa.fa-map
+      = show_errors(@user, :location)
+  - if @user.website.present?
+    .field
+      = f.text_field :website, placeholder: 'Website', value: @user.website
+      = f.label :website do
+        .fa.fa-link
+      = show_errors(@user, :website)
+  - if @user.locale.present? && @user.locale != 'en'
+    .field
+      = f.text_field :locale, placeholder: 'Language', value: @user.locale
+      = f.label :locale do
+        .fa.fa-globe
+      = show_errors(@user, :locale)
+  - if @user.timezone.present? && @user.timezone != 'UTC'
+    .field
+      = f.text_field :timezone, placeholder: 'Timezone', value: @user.timezone
+      = f.label :timezone do
+        .fa.fa-clock-o
+      = show_errors(@user, :timezone)
   .field
     = recaptcha_tags
     = show_errors(@user, :recaptcha, prefix: false)

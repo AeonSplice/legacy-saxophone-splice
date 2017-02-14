@@ -11,7 +11,7 @@ Rails.application.config.sorcery.configure do |config|
   # override the 'not_authenticated' method of course.
   # Default: `:not_authenticated`
   #
-  # config.not_authenticated_action =
+  config.not_authenticated_action = :user_not_authorized
 
   # When a non logged in user tries to enter a page that requires login, save
   # the URL he wanted to reach, and send him there after login, using 'redirect_back_or_to'.
@@ -73,27 +73,10 @@ Rails.application.config.sorcery.configure do |config|
   # Default: `'path/to/ca_file'`
   #
   # config.ca_file =
-
-  # For information about LinkedIn API:
-  # - user info fields go to https://developer.linkedin.com/documents/profile-fields
-  # - access permissions go to https://developer.linkedin.com/documents/authentication#granting
   #
-  # config.linkedin.key = ""
-  # config.linkedin.secret = ""
-  # config.linkedin.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=linkedin"
-  # config.linkedin.user_info_fields = ['first-name', 'last-name']
-  # config.linkedin.user_info_mapping = {first_name: "firstName", last_name: "lastName"}
-  # config.linkedin.access_permissions = ['r_basicprofile']
-  #
-  #
-  # For information about XING API:
-  # - user info fields go to https://dev.xing.com/docs/get/users/me
-  #
-  # config.xing.key = ""
-  # config.xing.secret = ""
-  # config.xing.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=xing"
-  # config.xing.user_info_mapping = {first_name: "first_name", last_name: "last_name"}
-  #
+  #############
+  ## Twitter ##
+  #############
   #
   # Twitter will not accept any requests nor redirect uri containing localhost,
   # make sure you use 0.0.0.0:3000 to access your app in development
@@ -101,35 +84,45 @@ Rails.application.config.sorcery.configure do |config|
   config.twitter.key = ENV['AEON_TWITTER_KEY']
   config.twitter.secret = ENV['AEON_TWITTER_SECRET']
   config.twitter.callback_url = "https://#{Rails.configuration.x.url}/oauth/callback/twitter"
-  config.twitter.user_info_mapping = {:username => 'screen_name'}
+  config.twitter.user_info_mapping = { username: 'screen_name',
+                                       realname: 'name',
+                                       bio: 'description',
+                                       location: 'location',
+                                       website: 'url',
+                                       locale: 'lang',
+                                       timezone: 'time_zone' }
+  #
+  ##############
+  ## Facebook ##
+  ##############
   #
   config.facebook.key = ENV['AEON_FACEBOOK_KEY']
   config.facebook.secret = ENV['AEON_FACEBOOK_SECRET']
   config.facebook.callback_url = "https://#{Rails.configuration.x.url}/oauth/callback/facebook"
-  config.facebook.user_info_mapping = {:email => 'name'}
-  config.facebook.access_permissions = ['email']
-  config.facebook.display = 'page'
-  config.facebook.api_version = 'v2.2'
+  config.facebook.user_info_path = 'me?fields=name,email,locale,timezone'
+  config.facebook.user_info_mapping = { realname: 'name',
+                                        email: 'email',
+                                        locale: 'locale',
+                                        timezone: 'timezone' }
+  config.facebook.access_permissions = ['public_profile', 'email']
+  config.facebook.display = 'popup'
+  config.facebook.api_version = 'v2.8'
   #
-  # config.github.key = ""
-  # config.github.secret = ""
-  # config.github.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=github"
-  # config.github.user_info_mapping = {:email => "name"}
-  #
-  # config.paypal.key = ""
-  # config.paypal.secret = ""
-  # config.paypal.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=paypal"
-  # config.paypal.user_info_mapping = {:email => "email"}
-  #
-  # config.wechat.key = ""
-  # config.wechat.secret = ""
-  # config.wechat.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=wechat"
+  ############
+  ## Google ##
+  ############
   #
   config.google.key = ENV['AEON_GOOGLE_KEY']
   config.google.secret = ENV['AEON_GOOGLE_SECRET']
   config.google.callback_url = "https://#{Rails.configuration.x.url}/oauth/callback/google"
-  config.google.user_info_mapping = {:email => 'email', :username => 'name'}
+  config.google.user_info_mapping = { realname: 'name',
+                                      email: 'email',
+                                      locale: 'locale' }
   config.google.scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
+  #
+  ###############
+  ## Microsoft ##
+  ###############
   #
   # For Microsoft Graph, the key will be your App ID, and the secret will be your app password/public key.
   # The callback URL "can't contain a query string or invalid special characters", see: https://docs.microsoft.com/en-us/azure/active-directory/active-directory-v2-limitations#restrictions-on-redirect-uris
@@ -138,51 +131,10 @@ Rails.application.config.sorcery.configure do |config|
   config.microsoft.key = ENV['AEON_MICROSOFT_KEY']
   config.microsoft.secret = ENV['AEON_MICROSOFT_SECRET']
   config.microsoft.callback_url = "https://#{Rails.configuration.x.url}/oauth/callback/microsoft"
-  config.microsoft.user_info_mapping = {:email => 'userPrincipalName', :username => 'displayName'}
+  config.microsoft.user_info_mapping = { realname: 'displayName',
+                                         email: 'userPrincipalName',
+                                         locale: 'preferredLanguage' }
   config.microsoft.scope = 'openid email https://graph.microsoft.com/User.Read'
-  #
-  # config.vk.key = ""
-  # config.vk.secret = ""
-  # config.vk.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=vk"
-  # config.vk.user_info_mapping = {:login => "domain", :name => "full_name"}
-  #
-  # config.slack.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=slack"
-  # config.slack.key = ''
-  # config.slack.secret = ''
-  # config.slack.user_info_mapping = {email: 'email'}
-  #
-  # To use liveid in development mode you have to replace mydomain.com with
-  # a valid domain even in development. To use a valid domain in development
-  # simply add your domain in your /etc/hosts file in front of 127.0.0.1
-  #
-  # config.liveid.key = ""
-  # config.liveid.secret = ""
-  # config.liveid.callback_url = "http://mydomain.com:3000/oauth/callback?provider=liveid"
-  # config.liveid.user_info_mapping = {:username => "name"}
-
-  # For information about JIRA API:
-  # https://developer.atlassian.com/display/JIRADEV/JIRA+REST+API+Example+-+OAuth+authentication
-  # to obtain the consumer key and the public key you can use the jira-ruby gem https://github.com/sumoheavy/jira-ruby
-  # or run openssl req -x509 -nodes -newkey rsa:1024 -sha1 -keyout rsakey.pem -out rsacert.pem to obtain the public key
-  # Make sure you have configured the application link properly
-
-  # config.jira.key = "1234567"
-  # config.jira.secret = "jiraTest"
-  # config.jira.site = "http://localhost:2990/jira/plugins/servlet/oauth"
-  # config.jira.signature_method =  "RSA-SHA1"
-  # config.jira.private_key_file = "rsakey.pem"
-
-  # For information about Salesforce API:
-  # https://developer.salesforce.com/signup &
-  # https://www.salesforce.com/us/developer/docs/api_rest/
-  # Salesforce callback_url must be https. You can run the following to generate self-signed ssl cert
-  # openssl req -new -newkey rsa:2048 -sha1 -days 365 -nodes -x509 -keyout server.key -out server.crt
-  # Make sure you have configured the application link properly
-  # config.salesforce.key = '123123'
-  # config.salesforce.secret = 'acb123'
-  # config.salesforce.callback_url = "https://127.0.0.1:9292/oauth/callback?provider=salesforce"
-  # config.salesforce.scope = "full"
-  # config.salesforce.user_info_mapping = {:email => "email"}
 
   # --- user config ---
   config.user_config do |user|

@@ -7,13 +7,7 @@ class SessionsController < ApplicationController
 
   def create
     if @user = login(params[:login], params[:password])
-      flash[:success] = 'Login successful!'
-      if session[:return_to]
-        redirect_to session[:return_to]
-        session[:return_to] = nil
-      else
-        redirect_to root_path
-      end
+      redirect_to root_path, success: 'Login successful!'
     else
       flash.now[:error] = 'Incorrect Username / Password combination.'
       @login = params[:login]

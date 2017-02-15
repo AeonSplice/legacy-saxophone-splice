@@ -2,4 +2,5 @@
 
 1. Write code
 2. ???
-3. Profit
+3. (''\\(\`\*ω\*´)/'')
+4. Profit

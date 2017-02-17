@@ -1,6 +1,6 @@
 class AuthenticationPolicy < ApplicationPolicy
   def destroy?
-    @user.can_remove_auth?(@record)
+    @user && @user.can_remove_auth?(@record)
   end
 
   class Scope < Scope

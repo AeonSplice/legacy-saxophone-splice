@@ -1,0 +1,24 @@
+.display-case
+  .panel.panel--padded
+    .panel__header
+      h1 = t('views.authentications.index.header')
+    .panel__body
+      - if @users.any?
+        table
+          thead
+            tr
+              th User
+              th Provider
+              th UID
+              th colspan='2' Controls
+
+          tbody
+            - @authentications.each do |auth|
+              tr
+                td = auth.user.username
+                td = auth.provider.titleize
+                td = auth.uid
+                td = link_to t('views.buttons.show'), auth, class: 'button button--primary'
+                td = link_to t('views.buttons.destroy'), auth, class: 'button button--red', data: { confirm: 'Are you sure?' }, method: :delete
+      - else
+        p No authentications found.

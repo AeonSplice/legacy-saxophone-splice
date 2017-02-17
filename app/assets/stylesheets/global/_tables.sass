@@ -1,0 +1,38 @@
+// Because having rounded borders on a table shouldn't be easy...
+table
+  border-spacing: 0
+  border-collapse: separate
+  thead
+    background-color: $white
+    th
+      text-align: center
+      font-family: 'Venera', sans-serif
+      font-weight: 900
+      font-variant: small-caps
+  tbody
+    td
+      text-align: left
+      vertical-align: middle
+      font-family: 'Electrolyze', sans-serif
+      font-weight: 300
+  th, td
+    padding: 6px
+    border: 1px solid $dark-blue
+    border-spacing: 0
+    border-bottom-width: 0
+    border-right-width: 0
+  tr
+    th:last-child, td:last-child
+      border-right-width: 1px
+  tr:first-child
+    th:first-child
+      border-top-left-radius: 5px
+    th:last-child
+      border-top-right-radius: 5px
+  tr:last-child
+    td
+      border-bottom-width: 1px
+    td:first-child
+      border-bottom-left-radius: 5px
+    td:last-child
+      border-bottom-right-radius: 5px

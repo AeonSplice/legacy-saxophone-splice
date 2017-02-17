@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :require_login, only: [:index, :show, :new, :create, :activate]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -11,9 +12,9 @@ class UsersController < ApplicationController
   def activate
     if @user = User.load_from_activation_token(params[:token])
       @user.activate!
-      redirect_to login_path, success: 'Successfully activated!'
+      redirect_to login_path, success: t('controllers.users.activate.success')
     else
-      redirect_to root_path, error: 'Invalid activation token.'
+      redirect_to root_path, error: t('controllers.users.activate.failure')
     end
   end
 
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     # TODO: Change to authorize begin/rescue
-    redirect_back fallback_location: root_path, error: 'Already logged in.' and return if current_user
+    redirect_back fallback_location: root_path, error: t('controllers.users.new.already_logged_in') and return if current_user
     @user = User.new
   end
 
@@ -39,13 +40,13 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     # Limit user creation for testing (don't let bots fuck with me TOO hard).
-    redirect_to users_path, error: 'Too many users. Stahp.' and return if User.count >= 20
+    redirect_to users_path, error: t('controllers.users.create.too_many_users') and return if User.count >= 20
 
     @user = User.new(user_params)
 
     respond_to do |format|
-      if recaptcha_passed(@user) && @user.save
-        format.html { redirect_to root_path, success: 'Account created, check your email for your activation link.' }
+      if recaptcha_passed?(@user) && @user.save
+        format.html { redirect_to root_path, success: t('controllers.users.create.success') }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -60,7 +61,7 @@ class UsersController < ApplicationController
     authorize @user, :update?
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, success: 'User was successfully updated.' }
+        format.html { redirect_to @user, success: t('controllers.users.update.success') }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -75,7 +76,7 @@ class UsersController < ApplicationController
     authorize @user, :destroy?
     @user.destroy!
     respond_to do |format|
-      format.html { redirect_to users_url, success: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, success: t('controllers.users.destroy.success') }
       format.json { head :no_content }
     end
   end
@@ -89,7 +90,7 @@ class UsersController < ApplicationController
     # Override record not found defaults
     def record_not_found
       skip_auth
-      redirect_to users_path, error: 'Could not find that user.'
+      redirect_to users_path, error: t('controllers.users.record_not_found')
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

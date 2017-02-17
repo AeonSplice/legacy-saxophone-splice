@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/athix/sorcery.git
-  revision: ca6d7dd16601adf30e77910bfd25247f05520566
+  revision: efa288563a9c92105ec97ccdb88f5e2e2a71da46
   branch: feature/build-users
   specs:
     sorcery (0.10.2)
@@ -184,6 +184,9 @@ GEM
     puma (3.7.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
+    pundit-matchers (1.1.0)
+      pundit (~> 1.1, >= 1.1.0)
+      rspec-rails (>= 3.0.0)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -222,6 +225,7 @@ GEM
     recaptcha (4.1.0)
       json
     ref (2.0.0)
+    rolify (5.1.0)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -327,9 +331,11 @@ DEPENDENCIES
   pg (~> 0.18)
   puma (~> 3.0)
   pundit
+  pundit-matchers
   rails (~> 5.0.0)
   rails-erd
   recaptcha
+  rolify
   rspec-rails
   ruby-graphviz
   sass-rails (~> 5.0)

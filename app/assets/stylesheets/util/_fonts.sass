@@ -1,1 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Electrolize')
+
+$venera-weights: 100, 300, 500, 700, 900
+@each $weight in $venera-weights
+  @font-face
+    font-family: 'Venera'
+    src: font-url("Venera-#{$weight}.otf")
+    font-weight: $weight
+    font-style: normal

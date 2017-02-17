@@ -68,6 +68,6 @@
     = recaptcha_tags
     = show_errors(@user, :recaptcha, prefix: false)
   .actions
-    = f.submit 'Register', class: 'button button--primary w35', data: { disable_with: 'Registering...' }
+    = f.submit t('views.buttons.register'), class: 'button button--primary w35', data: { disable_with: t('views.buttons.registering') }
     .float-right.right.w25
-      = link_to 'Login', login_path, class: 'button w95'
+      = link_to t('views.buttons.login'), login_path, class: 'button w95'

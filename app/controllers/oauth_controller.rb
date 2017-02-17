@@ -1,4 +1,6 @@
 class OauthController < ApplicationController
+  skip_before_action :require_login
+
   def oauth
     login_at(params[:provider])
   end
@@ -10,18 +12,18 @@ class OauthController < ApplicationController
       sorcery_fetch_user_hash(provider)
       unless Authentication.where(provider: provider, uid: @user_hash[:uid]).any?
         add_provider_to_user(provider)
-        redirect_to edit_user_path(current_user), success: "Added #{provider.titleize} to your oauth credentials."
+        redirect_to edit_user_path(current_user), success: t('controllers.oauth.callback.added_provider', provider: provider.titleize)
       else
-        redirect_to edit_user_path(current_user), error: "These #{provider.titleize} credentials are already being used, try logging in instead."
+        redirect_to edit_user_path(current_user), error: t('controllers.oauth.callback.already_used', provider: provider.titleize)
       end
     else
       if @user = login_from(provider)
         if @user.activated?
-          redirect_to root_path, success: "Logged in via #{provider.titleize}"
+          redirect_to root_path, success: t('controllers.oauth.callback.logged_in', provider: provider.titleize)
         else
           logout
           reset_session
-          redirect_to root_path, error: "Please activate your account before logging in via #{provider.titleize}"
+          redirect_to root_path, error: t('controllers.oauth.callback.activate_first', provider: provider.titleize)
         end
       else
         begin
@@ -32,7 +34,7 @@ class OauthController < ApplicationController
           render :provider_signup
         rescue => e
           logger.error e.message
-          redirect_to root_path, error: "Failed to login via #{provider.titleize}"
+          redirect_to root_path, error: t('controllers.oauth.callback.failed_to_login', provider: provider.titleize)
         end # End Try/Catch Block
       end # End Login/Register Block
     end # End User/Visiter Block
@@ -50,9 +52,9 @@ class OauthController < ApplicationController
         @user.setup_activation
       end
 
-      if recaptcha_passed(@user) && @user.save && @auth.save
+      if recaptcha_passed?(@user) && @user.save && @auth.save
         reset_session
-        redirect_to root_path, success: 'Account created, check your email for your activation link.'
+        redirect_to root_path, success: t('controllers.oauth.provider_signup.success')
       else
         # Don't leak auth information if user has validation errors
         @auth = nil

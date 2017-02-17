@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  skip_before_action :require_login
   layout 'barebones', only: [:motd]
 
   def index

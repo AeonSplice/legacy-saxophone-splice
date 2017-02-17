@@ -8,6 +8,6 @@
     = label_tag :password do
       .fa.fa-lock
   .actions
-    = submit_tag 'Login', class: 'button button--primary w60'
+    = submit_tag t('views.buttons.login'), class: 'button button--primary w60'
     .float-right.right.w40
-      = link_to 'Register', signup_path, class: 'button w95'
+      = link_to t('views.buttons.register'), signup_path, class: 'button w95'

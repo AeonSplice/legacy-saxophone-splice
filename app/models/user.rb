@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  rolify
+
   authenticates_with_sorcery! do |config|
     config.authentications_class = Authentication
   end

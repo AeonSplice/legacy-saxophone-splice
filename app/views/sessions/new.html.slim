@@ -1,12 +1,12 @@
 .display-case
   .panel.panel--padded
     .panel__header
-      h1 Login
+      h1 = t('views.sessions.new.header')
     .panel__body
       = render partial: 'form'
       hr
       .center
-        = link_to 'Forgot your password?', '#thats_unfortunate'
+        = link_to t('views.sessions.new.forgot_password'), '#thats_unfortunate', class: 'clean'
       hr
       = link_to auth_at_provider_path(provider: :facebook), class: 'oauth oauth--facebook' do
         .fa.fa-facebook
@@ -17,4 +17,4 @@
       = link_to auth_at_provider_path(provider: :twitter), class: 'oauth oauth--twitter' do
         .fa.fa-twitter
   .center.mt20
-    = link_to 'Back', :back, class: 'button'
+    = link_to t('views.buttons.back'), :back, class: 'button'

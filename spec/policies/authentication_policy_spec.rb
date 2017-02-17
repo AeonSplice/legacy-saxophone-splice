@@ -1,28 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe AuthenticationPolicy do
+  subject { described_class.new(user, authentication) }
 
-  let(:user) { User.new }
-
-  subject { described_class }
-
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  let(:resolved_scope) do
+    described_class::Scope.new(user, Authentication.all).resolve
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context 'for a visitor' do
+    let(:user) { nil }
+    let(:authentication) { create :authentication }
+
+    it { is_expected.to forbid_action(:destroy) }
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  context 'for a user' do
+    let(:user) { create :user }
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+    context 'without auth' do
+      let(:authentication) { create :authentication }
 
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+      it 'excludes auth from resolved scope' do
+        expect(resolved_scope).not_to include(authentication)
+      end
+
+      it { is_expected.to forbid_action(:destroy) }
+    end
+
+    context 'with auth' do
+      let(:authentication) { create :authentication, user: user }
+
+      it 'includes auth in resolved scope' do
+        expect(resolved_scope).to include(authentication)
+      end
+
+      it { is_expected.to permit_action(:destroy) }
+    end
   end
 end

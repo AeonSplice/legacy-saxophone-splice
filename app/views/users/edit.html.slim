@@ -27,6 +27,9 @@
         .fa.fa-windows
       = link_to auth_at_provider_path(provider: :twitter), class: 'oauth oauth--twitter' do
         .fa.fa-twitter
+      hr
+      .center
+        = link_to 'Delete Account', @user, data: { confirm: 'You\'re about to delete this account, are you sure?' }, method: :delete, class: 'button button--red'
   .center.mt20
     = link_to 'View Profile', @user
     span<> |

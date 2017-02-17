@@ -17,7 +17,7 @@ class AuthenticationsController < ApplicationController
     provider = @authentication.provider
     @authentication.destroy!
     respond_to do |format|
-      format.html { redirect_to edit_user_path(user), success: "Successfully removed #{provider.titleize} from your account."}
+      format.html { redirect_to edit_user_path(user), success: t('controllers.authentications.destroy.success', provider: provider.titleize) }
       format.json { head :no_content }
     end
   end
@@ -30,18 +30,18 @@ class AuthenticationsController < ApplicationController
 
   def user_not_authorized
     if current_user
-      redirect_to edit_user_path(current_user), error: 'You don\'t have permission to remove that authentication.'
+      redirect_to edit_user_path(current_user), error: t('controllers.authentications.user_not_authorized.user')
     else
-      redirect_to root_path, error: 'You don\'t have permission to remove that authentication.'
+      redirect_to root_path, error: t('controllers.authentications.user_not_authorized.guest')
     end
   end
 
   def record_not_found
     skip_auth
     if current_user
-      redirect_to edit_user_path(current_user), error: 'Could not find that authentication.'
+      redirect_to edit_user_path(current_user), error: t('controllers.authentications.record_not_found')
     else
-      redirect_to root_path, error: 'Could not find that authentication.'
+      redirect_to root_path, error: t('controllers.authentications.record_not_found')
     end
   end
 end

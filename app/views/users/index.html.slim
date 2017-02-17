@@ -10,7 +10,10 @@
               th Username
               th Email
               th Active
-              th colspan='3' Controls
+              - if logged_in?
+                th colspan='3' Controls
+              - else
+                th Controls
 
           tbody
             - @users.each do |user|
@@ -18,8 +21,15 @@
                 td = user.username
                 td = user.email
                 td = user.activated?
-                td = link_to 'Show', user
-                td = link_to 'Edit', edit_user_path(user)
-                td = link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete
+                td.center
+                  - if policy(user).show?
+                    = link_to t('views.buttons.show'), user, class: 'button button--primary'
+                - if logged_in?
+                  td.center
+                    - if policy(user).edit?
+                      = link_to t('views.buttons.edit'), edit_user_path(user), class: 'button button--green'
+                  td.center
+                    - if policy(user).destroy?
+                      = link_to t('views.buttons.destroy'), user, class: 'button button--red', data: { confirm: 'Are you sure?' }, method: :delete
       - else
         p No users found.

@@ -11,3 +11,4 @@ athix = User.new  username: 'Athix',
                   activation_state: 'active'
 athix.bypass_activation_email = true
 athix.save!
+athix.add_role :admin

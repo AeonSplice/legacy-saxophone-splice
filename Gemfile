@@ -28,9 +28,10 @@ gem 'sorcery', github: 'athix/sorcery', branch: 'feature/build-users'
 
 gem 'slim-rails'          # clean emmett-like html templates
 gem 'font-awesome-rails'  # icon sets
-# gem 'sorcery'             # Authentication
+# gem 'sorcery'           # Authentication
 gem 'pundit'              # Authorization
 gem 'recaptcha', require: 'recaptcha/rails' # Recaptcha for forms
+gem 'rolify'
 
 ################
 ## Deployment ##
@@ -59,6 +60,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'pundit-matchers'
 end
 
 group :development do

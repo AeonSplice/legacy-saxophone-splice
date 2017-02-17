@@ -1,10 +1,18 @@
 class UserPolicy < ApplicationPolicy
   def update?
-    @user == @record
+    if @user && @user.has_role?(:admin)
+      true
+    else
+      @user == @record
+    end
   end
 
   def destroy?
-    @user == @record
+    if @user && @user.has_role?(:admin)
+      true
+    else
+      @user == @record
+    end
   end
 
   class Scope < Scope

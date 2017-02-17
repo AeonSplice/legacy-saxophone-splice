@@ -20,4 +20,113 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  #############
+  ## General ##
+  #############
+  language: 'English'
+  time:
+    formats:
+      default: "%B %-d, %Y"
+      iso_8601: "%FT%T%:z"
+      full_date: "%B %-d, %Y"
+  #################
+  ## Controllers ##
+  #################
+  controllers:
+    # Application
+    application:
+      user_not_authorized:
+        user: You don't have permission to do that.
+        guest: You don't have permission to do that, try logging in first.
+      session_expired: Your session has expired, please log back in.
+      record_not_found: Could not find that record.
+    # Authentications
+    authentications:
+      destroy:
+        success: "Successfully removed %{provider} from your account."
+      user_not_authorized:
+        user: You don't have permission to remove that authentication.
+        guest: You don't have permission to remove that authentication.
+      record_not_found: Could not find that authentication.
+    # OAuth
+    oauth:
+      callback:
+        added_provider: "Added %{provider} to your oauth credentials."
+        already_used: "These %{provider} credentials are already being used, try logging in instead."
+        logged_in: "Logged in via %{provider}"
+        activate_first: "Please activate your account before logging in via %{provider}"
+        failed_to_login: "Failed to login via %{provider}"
+      provider_signup:
+        success: Account created, check your email for your activation link.
+    # Sessions
+    sessions:
+      new:
+        already_logged_in: Already logged in.
+      create:
+        success: Login successful!
+        failure: Incorrect Username / Password combination.
+      destroy:
+        success: Logged out!
+        failure: Shenanigans!
+    # Users
+    users:
+      activate:
+        success: Successfully activated!
+        failure: Invalid activation token.
+      new:
+        already_logged_in: Already logged in.
+      create:
+        too_many_users: Too many users. Stahp.
+        success: Account created, check your email for your activation link.
+      update:
+        success: User was successfully updated.
+      destroy:
+        success: User was successfully destroyed.
+      record_not_found: Could not find that user.
+  #############
+  ## Mailers ##
+  #############
+  mailers:
+    activate_needed_email:
+      subject: Activate your account, yo.
+    activation_success_email:
+      subject: Yo, your account has been activated.
+  ############
+  ## Models ##
+  ############
+  # models:
+  ################
+  ## Validators ##
+  ################
+  validators:
+    username_convention:
+      alphanumeric: is not alphanumeric (letters, numbers, underscores or hyphens)
+      start_with_letter: should start with a letter
+      illegal_characters: contains illegal characters
+  ###########
+  ## Views ##
+  ###########
+  views:
+    buttons:
+      show: Show
+      edit: Edit
+      destroy: Destroy
+      register: Register
+      registering: Registering...
+      login: Login
+      logout: Logout
+      sign_up: Sign Up
+      home: Home
+      about: About
+      contact: Contact
+      back: Back
+    authentications:
+      index:
+        header: Listing authentications
+    oauth:
+      provider_signup:
+        header: "Sign Up via %{provider}"
+    sessions:
+      new:
+        header: Login
+        forgot_password: Forgot your password?

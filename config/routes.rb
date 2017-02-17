@@ -43,9 +43,16 @@ Rails.application.routes.draw do
   get  'oauth/:provider'       => 'oauth#oauth',           as: 'auth_at_provider', provider: /facebook|google|microsoft|twitter/
   get  'users/:token/activate' => 'users#activate',        as: 'activate_user'
 
+  ['404','422','500'].each do |code|
+    get code, to: "errors#show", code: code
+  end
+
   ####################
   ## Catchall Paths ##
   ####################
 
-  
+  root to: redirect("/#{I18n.default_locale}", status: 302), as: :redirected_root
+
+  get "/*path", to: redirect("/#{I18n.default_locale}/%{path}", status: 302), constraints: {path: /(?!(#{I18n.available_locales.join("|")})\/).*/}, format: false
+  get '*unmatched_route', to: 'errors#show', code: 404
 end

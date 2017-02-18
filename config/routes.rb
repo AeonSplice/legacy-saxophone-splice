@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   get  'oauth/:provider'       => 'oauth#oauth',           as: 'auth_at_provider', provider: /facebook|google|microsoft|twitter/
   get  'users/:token/activate' => 'users#activate',        as: 'activate_user'
 
-  ['404','422','500'].each do |code|
+  ['401','404','422','500'].each do |code|
     get code, to: "errors#show", code: code
   end
 

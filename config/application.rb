@@ -28,5 +28,8 @@ module SaxophoneSplice
     # config.action_view.field_error_proc = Proc.new  do |html_tag, instance|
     #   html_tag.html_safe
     # end
+
+    # Route errors to the errors controller
+    config.exceptions_app = self.routes
   end
 end

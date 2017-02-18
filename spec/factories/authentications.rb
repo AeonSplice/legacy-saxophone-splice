@@ -7,5 +7,5 @@ FactoryGirl.define do
 end
 
 def random_provider
-  ['facebook', 'google', 'microsoft', 'twitter']
+  ['facebook', 'google', 'microsoft', 'twitter'].sample
 end

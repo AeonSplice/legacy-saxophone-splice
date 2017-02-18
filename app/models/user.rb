@@ -50,9 +50,9 @@ class User < ApplicationRecord
   validates :email,
     email_convention: true
 
-  ####################
-  ## Public Methods ##
-  ####################
+  #############
+  ## Queries ##
+  #############
 
   # Return if user can remove a given auth
   def can_remove_auth?(authentication)
@@ -84,6 +84,14 @@ class User < ApplicationRecord
     return false if bypass_activation_email
     true
   end
+
+  def language
+    t('language', locale: self.locale)
+  end
+
+  ##############
+  ## Commands ##
+  ##############
 
   # Prevent setting up activation if created as active
   def setup_activation

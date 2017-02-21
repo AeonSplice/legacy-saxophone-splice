@@ -29,7 +29,11 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     if current_user
-      redirect_back fallback_location: root_path, error: t('controllers.application.user_not_authorized.user')
+      unless request.referrer == login_url
+        redirect_back fallback_location: root_path, error: t('controllers.application.user_not_authorized.user')
+      else
+        redirect_to root_path, error: t('controllers.application.user_not_authorized.user')
+      end
     else
       redirect_to login_path, error: t('controllers.application.user_not_authorized.guest')
     end

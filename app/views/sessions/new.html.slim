@@ -6,7 +6,7 @@
       = render partial: 'form'
       hr
       .center
-        = link_to t('views.sessions.new.forgot_password'), '#thats_unfortunate', class: 'clean'
+        = link_to t('views.sessions.new.forgot_password'), new_password_reset_path, class: 'clean'
       hr
       = link_to auth_at_provider_path(provider: :facebook), class: 'oauth oauth--facebook' do
         .fa.fa-facebook

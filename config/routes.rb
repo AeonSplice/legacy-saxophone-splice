@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     ## Resources ##
     ###############
 
-    resources :users
+    resources :users,           except: [:new]
     resources :articles
     resources :sessions,        only: [:create]
     resources :authentications, only: [:destroy]
@@ -31,6 +31,15 @@ Rails.application.routes.draw do
     get  'login'  => 'sessions#new',     as: 'login'
     post 'logout' => 'sessions#destroy', as: 'logout'
     get  'signup' => 'users#new',        as: 'signup'
+
+    #####################
+    ## Password Resets ##
+    #####################
+
+    post  'users/reset'        => 'password_resets#create', as: 'password_resets'
+    get   'users/reset/new'    => 'password_resets#new',    as: 'new_password_reset'
+    get   'users/reset/:token' => 'password_resets#edit',   as: 'edit_password_reset'
+    patch 'users/reset/:token' => 'password_resets#update', as: 'password_reset'
   end
 
   #####################

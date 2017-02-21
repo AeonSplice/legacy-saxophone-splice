@@ -58,6 +58,13 @@ en:
         failed_to_login: "Failed to login via %{provider}"
       provider_signup:
         success: Account created, check your email for your activation link.
+    # Password Resets
+    password_resets:
+      create:
+        success: Instructions have been sent to your email.
+      update:
+        success: Password was succesfully updated.
+      invalid_token: Invalid password reset token.
     # Sessions
     sessions:
       new:
@@ -91,6 +98,8 @@ en:
       subject: Activate your account, yo.
     activation_success_email:
       subject: Yo, your account has been activated.
+    reset_password_email:
+      subject: Password reset requested, yo.
   ############
   ## Models ##
   ############

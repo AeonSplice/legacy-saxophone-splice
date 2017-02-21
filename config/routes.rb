@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     ###############
 
     resources :users
+    resources :articles
     resources :sessions,        only: [:create]
     resources :authentications, only: [:destroy]
 

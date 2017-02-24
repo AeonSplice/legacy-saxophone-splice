@@ -24,6 +24,18 @@ module SaxophoneSplice
       g.javascripts = false
     end
 
+    # Timezone Configuration
+    config.time_zone = 'UTC'
+
+    # Locale Configuration
+    config.i18n.default_locale = :en
+    config.i18n.fallbacks = [:en]
+
+    # fallbacks value can also be a hash - a map of fallbacks if you will
+    # missing translations of es and fr languages will fallback to english
+    # missing translations in german will fallback to french ('de' => 'fr')
+    # config.i18n.fallbacks = {'es' => 'en', 'fr' => 'en', 'de' => 'fr'}
+
     # Disable field_with_errors div
     # config.action_view.field_error_proc = Proc.new  do |html_tag, instance|
     #   html_tag.html_safe

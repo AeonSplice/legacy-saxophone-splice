@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     # Limit user creation for testing (don't let bots fuck with me TOO hard).
     redirect_to users_path, error: t('controllers.users.create.too_many_users') and return if User.count >= 20
 
-    @user = User.new(user_params)
+    @user = User.new(create_user_params)
 
     respond_to do |format|
       if recaptcha_passed?(@user) && @user.save
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   def update
     authorize @user, :update?
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(update_user_params)
         format.html { redirect_to @user, success: t('controllers.users.update.success') }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -94,11 +94,16 @@ class UsersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
+    def create_user_params
       params.require(:user).permit(:username,
-                                   :realname,
-                                   :nickname,
                                    :email,
+                                   :password,
+                                   :password_confirmation)
+    end
+
+    def update_user_params
+      params.require(:user).permit(:realname,
+                                   :nickname,
                                    :bio,
                                    :location,
                                    :website,

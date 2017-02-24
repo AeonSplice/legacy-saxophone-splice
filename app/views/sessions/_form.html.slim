@@ -1,15 +1,15 @@
 = form_tag sessions_path, method: 'post' do
   .field
     = text_field_tag :login, @login, placeholder: 'Username / Email', required: true
-    = label_tag :login do
+    = label_tag :login, class: 'label--text' do
       .fa.fa-user
   .field
     = password_field_tag :password, nil, placeholder: 'Password', required: true
-    = label_tag :password do
+    = label_tag :password, class: 'label--text' do
       .fa.fa-lock
   .field
     = check_box_tag :remember, true, @remember
-    = label_tag :remember, 'Remember me'
+    = label_tag :remember, 'Remember me', class: 'label--checkbox'
   .actions
     = submit_tag t('views.buttons.login'), class: 'button button--primary w60'
     .float-right.right.w40

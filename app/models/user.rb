@@ -86,12 +86,26 @@ class User < ApplicationRecord
   end
 
   def language
-    t('language', locale: self.locale)
+    I18n.t('language', locale: self.locale)
   end
 
   ##############
   ## Commands ##
   ##############
+
+  def sanitize_timezone
+    if self.timezone.present? and not valid_timezone?(self.timezone)
+      converted_timezone = timezone_from_offset(self.timezone)
+      self.timezone = valid_timezone?(converted_timezone) ? converted_timezone : 'UTC'
+    end
+  end
+
+  def sanitize_locale
+    if self.locale.present? and not valid_locale?(self.locale)
+      converted_locale = locale_without_country(self.locale)
+      self.locale = valid_locale?(converted_locale) ? converted_locale : I18n.default_locale
+    end
+  end
 
   # Prevent setting up activation if created as active
   def setup_activation

@@ -17,4 +17,10 @@ module ApplicationHelper
       content_tag :div, nil, class: "fa fa-#{provider.downcase}"
     end
   end
+
+  def available_locale_pairs
+    I18n.available_locales.map do |locale|
+      [I18n.t('language', locale: locale), locale.to_s]
+    end
+  end
 end

@@ -29,6 +29,8 @@ class OauthController < ApplicationController
         begin
           sorcery_fetch_user_hash(provider)
           @user = build_from(provider)
+          @user.sanitize_timezone
+          @user.sanitize_locale
           session[:provider] = provider
           session[:uid] = @user_hash[:uid]
           render :provider_signup

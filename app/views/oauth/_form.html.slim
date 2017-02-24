@@ -1,67 +1,67 @@
 = form_for @user, url: provider_signup_path, method: 'post' do |f|
   .field
     = f.text_field :username, placeholder: 'Username', value: @user.username, required: true
-    = f.label :username do
+    = f.label :username, class: 'label--text' do
       .fa.fa-user
     = show_errors(@user, :username)
   .field
     = f.email_field :email, placeholder: 'Email', value: @user.email, required: true
-    = f.label :email do
+    = f.label :email, class: 'label--text' do
       .fa.fa-envelope
     = show_errors(@user, :email)
   h4.center.m5 Optional Fields
   .field
     = f.password_field :password, placeholder: 'Password'
-    = f.label :password do
+    = f.label :password, class: 'label--text' do
       .fa.fa-lock
     = show_errors(@user, :password)
   .field
     = f.password_field :password_confirmation, placeholder: 'Password Confirmation'
-    = f.label :password_confirmation do
+    = f.label :password_confirmation, class: 'label--text' do
       .fa.fa-lock
     = show_errors(@user, :password_confirmation)
   - if @user.realname.present?
     p.m5 Real Name
     .field
       = f.text_field :realname, placeholder: 'Real Name', value: @user.realname
-      = f.label :realname do
+      = f.label :realname, class: 'label--text' do
         .fa.fa-user
       = show_errors(@user, :realname)
   - if @user.nickname.present?
     p.m5 Nickname
     .field
       = f.text_field :nickname, placeholder: 'Nickname', value: @user.nickname
-      = f.label :nickname do
+      = f.label :nickname, class: 'label--text' do
         .fa.fa-user
       = show_errors(@user, :nickname)
   - if @user.bio.present?
     .field
       = f.text_area :bio, placeholder: '"Short" bio', value: @user.bio
-      = f.label :bio do
+      = f.label :bio, class: 'label--text' do
         .fa.fa-comment
       = show_errors(@user, :bio)
   - if @user.location.present?
     .field
       = f.text_field :location, placeholder: 'Location', value: @user.location
-      = f.label :location do
+      = f.label :location, class: 'label--text' do
         .fa.fa-map
       = show_errors(@user, :location)
   - if @user.website.present?
     .field
       = f.text_field :website, placeholder: 'Website', value: @user.website
-      = f.label :website do
+      = f.label :website, class: 'label--text' do
         .fa.fa-link
       = show_errors(@user, :website)
   - if @user.locale.present? && @user.locale != 'en'
     .field
-      = f.text_field :locale, placeholder: 'Language', value: @user.locale
-      = f.label :locale do
+      = f.select :locale, options_for_select(available_locale_pairs, @user.locale.to_s)
+      = f.label :locale, class: 'label--text' do
         .fa.fa-globe
       = show_errors(@user, :locale)
   - if @user.timezone.present? && @user.timezone != 'UTC'
     .field
-      = f.text_field :timezone, placeholder: 'Timezone', value: @user.timezone
-      = f.label :timezone do
+      = f.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones
+      = f.label :timezone, class: 'label--text' do
         .fa.fa-clock-o
       = show_errors(@user, :timezone)
   .field

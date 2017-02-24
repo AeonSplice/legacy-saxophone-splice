@@ -6,12 +6,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if @user = login(params[:login], params[:password])
+    if @user = login(params[:login], params[:password], params[:remember])
       previous_url = session[:return_to_url].present? ? session[:return_to_url] : root_path
       redirect_to previous_url, success: t('controllers.sessions.create.success')
     else
       flash.now[:error] = t('controllers.sessions.create.failure')
       @login = params[:login]
+      @remember = params[:remember]
       render :new
     end
   end

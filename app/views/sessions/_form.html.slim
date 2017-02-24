@@ -7,6 +7,9 @@
     = password_field_tag :password, nil, placeholder: 'Password', required: true
     = label_tag :password do
       .fa.fa-lock
+  .field
+    = check_box_tag :remember, true, @remember
+    = label_tag :remember, 'Remember me'
   .actions
     = submit_tag t('views.buttons.login'), class: 'button button--primary w60'
     .float-right.right.w40

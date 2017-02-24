@@ -50,6 +50,12 @@ class User < ApplicationRecord
   validates :email,
     email_convention: true
 
+  validates :locale,
+    available_locale: true
+
+  validates :timezone,
+    available_timezone: true
+
   #############
   ## Queries ##
   #############

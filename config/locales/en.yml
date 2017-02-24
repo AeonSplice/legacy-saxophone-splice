@@ -112,6 +112,8 @@ en:
       alphanumeric: is not alphanumeric (letters, numbers, underscores or hyphens)
       start_with_letter: should start with a letter
       illegal_characters: contains illegal characters
+    available_locale: is not currently available
+    available_timezone: is not currently available
   ###########
   ## Views ##
   ###########

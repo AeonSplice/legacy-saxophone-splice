@@ -22,6 +22,10 @@ module SaxophoneSplice
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
       g.stylesheets = false
       g.javascripts = false
+      g.helper = false
+      g.view_specs = false
+      g.controller_specs = false
+      g.skip_routes = true
     end
 
     # Timezone Configuration

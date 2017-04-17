@@ -40,7 +40,7 @@ class OauthController < ApplicationController
         end # End Try/Catch Block
       end # End Login/Register Block
     end # End User/Visiter Block
-  rescue OAuth2::error
+  rescue OAuth::Unauthorized, OAuth2::Error
     redirect_to login_path, error: t('controllers.oauth.callback.denied_permission')
   end # End Callback Function
 

@@ -56,6 +56,7 @@ en:
         logged_in: "Logged in via %{provider}"
         activate_first: "Please activate your account before logging in via %{provider}"
         failed_to_login: "Failed to login via %{provider}"
+        denied_permission: You must grant access to use oauth for logging in.
       provider_signup:
         success: Account created, check your email for your activation link.
     # Password Resets

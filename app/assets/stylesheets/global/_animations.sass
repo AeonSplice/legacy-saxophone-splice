@@ -13,14 +13,56 @@
 .strobing-rainbow
   animation: rainbow 2s infinite, blink 0.2s infinite
 
-$frames: 50
-$delta: 100/$frames
+.glitch
+  color: white
+  // font-size: 100px
+  position: relative
+  // width: 400px
+  margin: 0 auto
+  &:before
+    content: attr(data-text)
+    position: absolute
+    left: -2px
+    text-shadow: 1px 0 blue
+    top: 0
+    color: white
+    background: black
+    overflow: hidden
+    clip: rect(0,900px,0,0)
+    animation: noise-anim 3s infinite linear alternate-reverse
+  &:after
+    content: attr(data-text)
+    position: absolute
+    left: 2px
+    text-shadow: -1px 0 red
+    top: 0
+    color: white
+    background: black
+    overflow: hidden
+    clip: rect(0,900px,0,0)
+    animation: noise-anim-2 2s infinite linear alternate-reverse
 
 @keyframes blink
+  $frames: 50
+  $delta: 100/$frames
   @for $i from 0 through $frames
     #{$i * $delta * 1%}
       $current-opacity: 1-(($i * $delta)/100)
       opacity: $current-opacity
+
+@keyframes noise-anim
+  $frames: 10
+  $delta: 1/$frames
+  @for $i from 0 through $frames
+    #{ percentage($i * $delta) }
+      clip: rect(random(100)+px,9999px,random(100)+px,0)
+
+@keyframes noise-anim-2
+  $frames: 10
+  $delta: 1/$frames
+  @for $i from 0 through $frames
+    #{ percentage($i * $delta) }
+      clip: rect(random(100)+px,9999px,random(100)+px,0)
 
 // @keyframes blink
 //   @for $i from 0 through 100

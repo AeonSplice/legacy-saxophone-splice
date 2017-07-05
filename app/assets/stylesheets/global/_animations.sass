@@ -14,33 +14,34 @@
   animation: rainbow 2s infinite, blink 0.2s infinite
 
 .glitch
-  color: white
+  // color: white
   // font-size: 100px
   position: relative
   // width: 400px
   margin: 0 auto
+  animation: rainbow 3s infinite
   &:before
     content: attr(data-text)
     position: absolute
     left: -2px
     text-shadow: 1px 0 blue
     top: 0
-    color: white
+    // color: white
     background: black
     overflow: hidden
     clip: rect(0,900px,0,0)
-    animation: noise-anim 3s infinite linear alternate-reverse
+    animation: noise-anim 3s infinite linear alternate-reverse, rainbow 3s infinite
   &:after
     content: attr(data-text)
     position: absolute
     left: 2px
     text-shadow: -1px 0 red
     top: 0
-    color: white
+    // color: white
     background: black
     overflow: hidden
     clip: rect(0,900px,0,0)
-    animation: noise-anim-2 2s infinite linear alternate-reverse
+    animation: noise-anim-2 2s infinite linear alternate-reverse, rainbow 3s infinite
 
 @keyframes blink
   $frames: 50
